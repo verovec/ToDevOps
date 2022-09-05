@@ -1,0 +1,6 @@
+---
+# vars for configure_argocd_repository
+
+argocd_cli_package_url : "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+argocd_cli_binary_path: "/usr/local/bin/argocd"
+argocd_folder_remote_host: "/tmp/argocd"

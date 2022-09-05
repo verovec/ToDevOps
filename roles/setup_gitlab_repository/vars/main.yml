@@ -7,5 +7,5 @@ gitlab_user: "root"
 gitlab_user_email: "root@todevops.local"
 gitlab_password: ""
 
-public_repository_to_clone: "https://github.com/flavienbwk/reactjs-flask-ldap-boilerplate"
-internal_repository_name: "reactjs-flask-ldap-boilerplate"
+public_repository_to_clone: "https://github.com/verovec/Nginx-Template-Deployment"
+internal_repository_name: "Nginx-Template-Deployment"

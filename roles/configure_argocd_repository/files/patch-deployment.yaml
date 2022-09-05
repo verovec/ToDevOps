@@ -1,0 +1,7 @@
+spec:
+  template:
+    spec:
+      hostAliases:
+      - hostnames:
+        - gitlab_domain
+        ip: k8s_master_public_ip

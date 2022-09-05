@@ -1,0 +1,78 @@
+---
+# tasks file for setup_argocd_repository
+
+
+# Argocd to repository configuration
+
+- name: Install ArgoCD CLI
+  become: false
+  command: "{{ item }}"
+  with_items: 
+    - curl -sSL -o {{ argocd_cli_binary_path }} {{ argocd_cli_package_url }}
+    - chmod +x {{ argocd_cli_binary_path }}
+
+- name: Login to ArgoCD from CLI
+  become: false
+  command: "{{ item }}"
+  with_items: 
+    - argocd login {{ argocd_domain }} --password {{ argocd_default_password }} --username admin --insecure
+  no_log: True
+
+- name: Add todevops.local in trusted certificates
+  become: false
+  command: "{{ item }}"
+  with_items:
+    - argocd cert add-tls {{ gitlab_domain }} --from {{ domain }}.pem
+
+- name: Copy Application Configuration
+  become: false
+  copy:
+    src: ./application.yaml
+    dest: "{{ argocd_folder_remote_host }}/application.yaml"
+    mode: 0644
+
+- name: Copy Application Configuration
+  become: false
+  copy:
+    src: ./configmap.yaml
+    dest: "{{ argocd_folder_remote_host }}/configmap.yaml"
+    mode: 0644
+
+- name: Copy Application Configuration
+  become: false
+  copy:
+    src: ./secret.yaml
+    dest: "{{ argocd_folder_remote_host }}/secret.yaml"
+    mode: 0644
+
+- name: Copy Application Configuration
+  become: false
+  copy:
+    src: ./patch-deployment.yaml
+    dest: "{{ argocd_folder_remote_host }}/patch-deployment.yaml"
+    mode: 0644
+
+- name: Update Application Configuration
+  become: true
+  command: "{{ item }}"
+  with_items:
+    - sed -i -E 's/gitlab_repository_to_clone/https:\/\/{{ gitlab_domain }}\/{{ gitlab_user }}\/{{ internal_repository_name }}.git/g' {{ argocd_folder_remote_host }}/application.yaml
+    - sed -i -E 's/gitlab_repository_to_clone/https:\/\/{{ gitlab_domain }}\/{{ gitlab_user }}\/{{ internal_repository_name }}.git/g' {{ argocd_folder_remote_host }}/configmap.yaml
+    - sed -i -E 's/gitlab_username_base64_encoded/{{ gitlab_user | b64encode }}/g' {{ argocd_folder_remote_host }}/secret.yaml
+    - sed -i -E 's/gitlab_password_base64_encoded/{{ gitlab_root_password | b64encode }}/g' {{ argocd_folder_remote_host }}/secret.yaml
+    - sed -i -E 's/gitlab_domain/{{ gitlab_domain }}/g' {{ argocd_folder_remote_host }}/patch-deployment.yaml
+    - sed -i -E 's/k8s_master_public_ip/{{ hostvars["master"].ansible_host }}/g' {{ argocd_folder_remote_host }}/patch-deployment.yaml
+  failed_when: False
+  no_log: True
+
+- name: Apply Application Configuration
+  become: true
+  command: "{{ item }}"
+  with_items:
+    - kubectl patch deployment -n argocd argocd-repo-server --patch-file {{ argocd_folder_remote_host }}/patch-deployment.yaml
+    - kubectl apply -f {{ argocd_folder_remote_host }}/secret.yaml
+    - kubectl apply -f {{ argocd_folder_remote_host }}/configmap.yaml
+    - kubectl apply -f {{ argocd_folder_remote_host }}/application.yaml
+  failed_when: False
+
+# / Argocd to repository configuration

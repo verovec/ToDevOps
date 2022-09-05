@@ -133,7 +133,7 @@ Now our infrastructure is set-up and ready, we're going to setup ArgoCD so it de
     ansible-playbook -i inventories/scaleway.ini ./playbooks/setup-continuous-deployment.yml -t import-repository --extra-vars @./vars/scaleway.yml --extra-vars "gitlab_password={{ gitlab_root_password }}"
 
     # Configure ArgoCD for our repository
-    ansible-playbook -i inventories/scaleway.ini ./playbooks/setup-continuous-deployment.yml -t configure-argocd-repo --extra-vars @./vars/scaleway.yml --extra-vars "gitlab_user=root"
+    ansible-playbook -i inventories/scaleway.ini ./playbooks/setup-continuous-deployment.yml -t configure-argocd-repository --extra-vars @./vars/scaleway.yml --extra-vars "gitlab_user=root"
     ```
 
 ## Why this repo ?

@@ -28,5 +28,5 @@ gitlab_admins:
     password: "P@SSW0RD"
 
 # Repo to clone to our gitlab and deploy with ArgoCD
-public_repository_to_clone: "https://github.com/flavienbwk/reactjs-flask-ldap-boilerplate"
-internal_repository_name: "reactjs-flask-ldap-boilerplate"
+public_repository_to_clone: "https://github.com/verovec/Nginx-Template-Deployment"
+internal_repository_name: "Nginx-Template-Deployment"

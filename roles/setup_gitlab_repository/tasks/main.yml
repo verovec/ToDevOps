@@ -72,11 +72,8 @@
   args:
     chdir: "/tmp/{{ internal_repository_name }}"
   with_items:
-    - git init
+    - git init --initial-branch=main
     - git add .
     - git commit -m "Initial import"
     - git remote add origin ssh://git@{{ gitlab_shell_url }}/{{ gitlab_user }}/{{ internal_repository_name }}.git
-    - git checkout -b main || true
-    - git config pull.rebase false
-    - git pull --allow-unrelated-histories origin main
     - GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no" git push --set-upstream origin main
