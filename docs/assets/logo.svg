@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title id="title">ToDevOps</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#1e3a5f"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </radialGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <clipPath id="disc"><circle cx="80" cy="80" r="74"/></clipPath>
+  </defs>
+  <circle cx="80" cy="80" r="74" fill="url(#bg)"/>
+  <g clip-path="url(#disc)" fill="none" stroke="#38bdf8" stroke-opacity="0.16" stroke-width="1.5">
+    <path d="M6 30 C40 44 120 16 154 30"/>
+    <path d="M6 56 C40 70 120 42 154 56"/>
+    <path d="M6 82 C40 96 120 68 154 82"/>
+    <path d="M6 108 C40 122 120 94 154 108"/>
+    <path d="M6 134 C40 148 120 120 154 134"/>
+  </g>
+  <g fill="none" stroke="#f8fafc" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M80 36 L112 52 L80 68 L48 52 Z" opacity="0.5"/>
+    <path d="M80 54 L112 70 L80 86 L48 70 Z" opacity="0.75"/>
+    <path d="M80 72 L112 88 L80 104 L48 88 Z"/>
+    <path d="M48 88 V98 L80 114 L112 98 V88"/>
+  </g>
+  <g transform="translate(106 110)">
+    <circle cx="0" cy="0" r="17" fill="#0b1220" stroke="url(#sky)" stroke-width="3"/>
+    <circle cx="0" cy="0" r="5" fill="none" stroke="url(#sky)" stroke-width="2.5"/>
+    <g stroke="url(#sky)" stroke-width="2.5" stroke-linecap="round">
+      <path d="M0 -5 V-17 M0 5 V17 M-5 0 H-17 M5 0 H17"/>
+      <path d="M-3.5 -3.5 L-12 -12 M3.5 3.5 L12 12 M-3.5 3.5 L-12 12 M3.5 -3.5 L12 -12"/>
+    </g>
+  </g>
+  <circle cx="80" cy="80" r="74" fill="none" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="2"/>
+</svg>
